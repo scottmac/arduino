@@ -15,6 +15,11 @@
  * and avoid compile-time configuration.
  */
 
+/*
+ * Updated by Scott MacVicar for arduino
+ * <scott@macvicar.net>
+ */
+
 #include <string.h>
 
 typedef unsigned long MD5_u32plus;
@@ -296,25 +301,25 @@ void MD5Final(unsigned char *result, void *ctxBuf)
 
 void do_md5(char *arg)
 {
-  char md5str[33];
-  MD5_CTX context;
-  unsigned char digest[16];
-	
-  md5str[0] = '\0';
-  MD5Init(&context);
-  MD5Update(&context, arg, strlen(arg));
-  MD5Final(digest, &context);
+	char md5str[33];
+	MD5_CTX context;
+	unsigned char digest[16];
 
-  make_digest(md5str, digest, 16);
-  Serial.println(md5str);
+	md5str[0] = '\0';
+	MD5Init(&context);
+	MD5Update(&context, arg, strlen(arg));
+	MD5Final(digest, &context);
+
+	make_digest(md5str, digest, 16);
+	Serial.println(md5str);
 }
 
 void setup() {
-  Serial.begin(9600);
+	Serial.begin(9600);
 }
 
 void loop() {
-  do_md5("test");
+	do_md5("test");
 
-  delay(1000);  
+	delay(1000);  
 }
